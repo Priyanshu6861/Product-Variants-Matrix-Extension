@@ -1,0 +1,38 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
+
+{% block page_product_detail_main %}
+    {% set fullGrid = false %}
+    {% set gridWidth = page.extensions.pluginConfiguration.gridWidth %}
+    <div class="row product-detail-main">
+        {% block page_product_detail_media %}
+            {# <div class="col-lg-5 product-detail-media"> #}
+            <div class="{% if gridWidth == 'small' %}col-lg-7{% elseif gridWidth == 'mediam' %}col-lg-6{% elseif gridWidth == 'large' %}col-lg-5{% elseif gridWidth == 'xlarge' %}col-lg-4{% else %}col-lg-7{% endif %} product-detail-media" data-cms-element-id="{{ element.id }}">
+                {% if page.product.media %}
+                    {% sw_include '@Storefront/storefront/element/cms-element-image-gallery.html.twig' with {
+                    'mediaItems': mediaItems,
+                    'zoom': true,
+                    'zoomModal': true,
+                    'displayMode': 'contain',
+                    'gutter': 5,
+                    'minHeight': '430px',
+                    'navigationArrows': 'inside',
+                    'navigationDots': 'inside',
+                    'galleryPosition': 'left',
+                    'isProduct': true,
+                    'fallbackImageTitle': page.product.translated.name,
+                    'startIndexThumbnails': 1,
+                    'startIndexSlider': 1,
+                    'keepAspectRatioOnZoom': false
+                } %}
+                {% endif %}
+            </div>
+        {% endblock %}
+
+        {% block page_product_detail_buy %}
+            {# <div class="col-lg-7 product-detail-buy"> #}
+            <div class="{% if gridWidth == 'small' %}col-lg-4{% elseif gridWidth == 'mediam' %}col-lg-6{% elseif gridWidth == 'large' %}col-lg-7{% elseif gridWidth == 'xlarge' %}col-lg-8{% else %}col-lg-5{% endif %} product-detail-buy" data-cms-element-id="{{ element.id }}">
+                {% sw_include '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

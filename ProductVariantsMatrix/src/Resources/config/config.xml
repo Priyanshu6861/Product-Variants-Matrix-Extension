@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Enable Plugin Configuration</title>
+        <title lang="de-DE">Plugin-Konfiguration aktivieren</title>
+
+        <input-field type="bool">
+            <name>configMatrixEnable</name>
+            <label>Enable</label>
+            <label lang="de-DE">Aktivieren</label>
+        </input-field>
+        <input-field type="text">
+            <name>cartBtnLabel</name>
+            <label>CartLabel</label>
+            <label lang="de-DE">Warenkorb-Beschriftung</label>
+            <required>true</required>
+            <defaultValue>Add to shopping cart</defaultValue>
+            <placeholder>Add to shopping cart</placeholder>
+            <helpText>Product Detail Page Add To Cart Button Label</helpText>
+            <helpText lang="de-DE">Beschriftung der Schaltfläche „In den Warenkorb“ auf der
+                Produktdetailseite</helpText>
+        </input-field>
+        <input-field type="text">
+            <name>resetBtnLabel</name>
+            <label>ResetLabel</label>
+            <label lang="de-DE">Zurücksetzen-Beschriftung</label>
+            <required>true</required>
+            <defaultValue>Reset</defaultValue>
+            <defaultValue lang="de-DE">Zurücksetzen</defaultValue>
+            <placeholder>Reset</placeholder>
+            <placeholder lang="de-DE">Zurücksetzen</placeholder>
+            <helpText>Summary Grid Reset Button Label</helpText>
+            <helpText lang="de-DE">Beschriftung der Schaltfläche „Zurücksetzen“ im
+                Zusammenfassungsraster</helpText>
+        </input-field>
+        <component name="sw-entity-multi-id-select">
+            <name>disableCustomerGroup</name>
+            <entity>customer_group</entity>
+            <label>Disable For Customer Group</label>
+            <label lang="de-DE">Für Kundengruppe deaktivieren</label>
+            <helpText>By selecting a customer group, the matrix grid will not be visible for that
+                customer. Leave the field empty to display for all customers.</helpText>
+            <helpText lang="de-DE">Durch Auswahl einer Kundengruppe wird das Matrixraster für diese
+                Kundengruppe nicht sichtbar. Lassen Sie das Feld leer, um es für alle Kunden
+                anzuzeigen.</helpText>
+        </component>
+    </card>
+    <card>
+        <title>Product Selection</title>
+        <title lang="de-DE">Product Selection</title>
+        <component name="sw-entity-multi-id-select">
+            <name>showDymanicProd</name>
+            <entity>product_stream</entity>
+            <label>Dynamic Product Group</label>
+            <label lang="de-DE">Dynamische Produktgruppe</label>
+            <helpText>By Selecting Dynamic Product Group The Matrix Grid Will Display For Selected
+                Group, Leave Empty For Display All Products</helpText>
+            <helpText lang="de-DE">Durch Auswahl einer dynamischen Produktgruppe wird das
+                Matrixraster für die ausgewählte Gruppe angezeigt. Lassen Sie es leer, um alle
+                Produkte anzuzeigen.</helpText>
+        </component>
+    </card>
+
+    <card>
+        <title>Main Grid Settings</title>
+        <title lang="de-DE">Hauptrastereinstellungen</title>
+
+        <input-field type="bool">
+            <name>showStock</name>
+            <label>Display Stock Availability</label>
+            <label lang="de-DE">Lagerverfügbarkeit anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Hide Stock Qty Column From Grid</helpText>
+            <helpText lang="de-DE">Spalte „Lagermenge“ aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showProperties</name>
+            <label>Display Attribute Image/Logo Columns</label>
+            <label lang="de-DE">Anzeigeattribut-Bild-/Logo-Spalten</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Hide Attributes Columns From Grid</helpText>
+            <helpText lang="de-DE">Attributspalten aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showProductSku</name>
+            <label>Display Product SKU</label>
+            <label lang="de-DE">Produkt-SKU anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Hide Product SKU Column From Grid</helpText>
+            <helpText lang="de-DE">Spalte „Produkt-SKU“ aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showUnitPrice</name>
+            <label>Display Unit Price</label>
+            <label lang="de-DE">Stückpreis anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Hide Unit Price Column From Grid</helpText>
+            <helpText lang="de-DE">Spalte „Stückpreis“ aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showSubTotal</name>
+            <label>Display Sub Total</label>
+            <label lang="de-DE">Zwischensumme anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Hide Subtotal Column From Grid</helpText>
+            <helpText lang="de-DE">Zwischensummenspalte aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showStockColorBadge</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Stock Color Badge</label>
+            <label lang="de-DE">Lagerfarbabzeichen anzeigen</label>
+            <helpText>Hide Stock Qty Color Badge From Grid</helpText>
+            <helpText lang="de-DE">Farbabzeichen für Lagermenge aus Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showOutOfStockProducts</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Out of Stock Product</label>
+            <label lang="de-DE">Nicht vorrätige Produkte anzeigen</label>
+            <helpText>Hide Out Of Stock Products From Grid</helpText>
+            <helpText lang="de-DE">Nicht vorrätige Produkte aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showTotalStockBar</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Total Stock Detail</label>
+            <label lang="de-DE">Gesamtbestandsdetails anzeigen</label>
+            <helpText>Hide Total Stock Avalibility Section From Grid</helpText>
+            <helpText lang="de-DE">Abschnitt „Gesamte Lagerverfügbarkeit“ aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showSearch</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Search Functionality</label>
+            <helpText>Show/Hide Search Bar in Matrix Grid For Variant Search (Based On Product SKU,
+                Attribute, Name) </helpText>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>gridWidth</name>
+            <label>Grid Width</label>
+            <label lang="de-DE">Rasterbreite</label>
+            <helpText>Set Matrix Grid Width in Product Detail Page</helpText>
+            <helpText lang="de-DE">Festlegen der Matrixrasterbreite auf der Produktdetailseite</helpText>
+            <options>
+                <option>
+                    <id>standard</id>
+                    <name>Standard</name>
+                    <name lang="de-DE">Standard</name>
+                </option>
+                <option>
+                    <id>mediam</id>
+                    <name>Half For Product Image and Half For Grid</name>
+                    <name lang="de-DE">Die Hälfte für das Produktbild und die andere Hälfte für das
+                        Raster</name>
+                </option>
+                <option>
+                    <id>large</id>
+                    <name>More Space For The Matrix Grid</name>
+                    <name lang="de-DE">Mehr Platz für das Matrixgitter</name>
+                </option>
+                <option>
+                    <id>xlarge</id>
+                    <name>Make Product Image Small and More Space For The Matrix Grid</name>
+                    <name lang="de-DE">Produktbild klein machen und mehr Platz für das Matrixraster
+                        schaffen</name>
+                </option>
+            </options>
+            <defaultValue>large</defaultValue>
+        </input-field>
+    </card>
+
+    <card>
+        <title>Summary Grid Settings</title>
+        <input-field type="bool">
+            <name>showSumGrid</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Summary Grid</label>
+            <label lang="de-DE">Zusammenfassungsraster anzeigen</label>
+            <helpText>Hide Top Summary Grid From Grid</helpText>
+            <helpText lang="de-DE">Oberes Zusammenfassungsraster aus dem Raster ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showSumQty</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Total Quantity</label>
+            <label lang="de-DE">Gesamtmenge anzeigen</label>
+            <helpText>Hide Total Selected Qty From Summary Grid</helpText>
+            <helpText lang="de-DE">Ausgewählte Gesamtmenge aus Übersichtsraster ausblenden</helpText>
+        </input-field>
+        <input-field type="text">
+            <name>qtyLabel</name>
+            <label>QuantityLabel</label>
+            <label lang="de-DE">Mengenetikett</label>
+            <required>true</required>
+            <defaultValue>Qty</defaultValue>
+            <placeholder>Qty</placeholder>
+            <helpText>Change Sumamry Grid Total Qty Label</helpText>
+            <helpText lang="de-DE">Beschriftung für Gesamtmenge im Zusammenfassungsraster ändern</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showSumTotal</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Grand Total</label>
+            <label lang="de-DE">Gesamtsumme anzeigen</label>
+            <helpText>Hide Grand Total From Summary Grid</helpText>
+            <helpText lang="de-DE">Gesamtsumme aus Übersichtsraster ausblenden</helpText>
+        </input-field>
+        <input-field type="text">
+            <name>totalLabel</name>
+            <label>TotalLabel</label>
+            <label lang="de-DE">Gesamtbezeichnung</label>
+            <required>true</required>
+            <defaultValue>Total</defaultValue>
+            <placeholder>Total</placeholder>
+            <placeholder lang="de-DE">Gesamt</placeholder>
+            <helpText>Change Sumamry Grid Grand Total Label</helpText>
+            <helpText lang="de-DE">Beschriftung für Gesamtsumme im Zusammenfassungsraster ändern</helpText>
+        </input-field>
+    </card>
+
+
+    <card>
+        <title>Product Listing Card</title>
+        <title lang="de-DE">Produktauflistungskarte</title>
+        <input-field type="bool">
+            <name>productListingView</name>
+            <defaultValue>true</defaultValue>
+            <label>Enable Matrix View On Product Listing</label>
+            <label lang="de-DE">Matrixansicht in der Produktauflistung aktivieren</label>
+            <helpText>Enable or disable the matrix view on the product listing page</helpText>
+            <helpText lang="de-DE">Matrixansicht auf der Produktauflistungsseite aktivieren oder
+                deaktivieren</helpText>
+        </input-field>
+        <component name="sw-entity-multi-id-select">
+            <name>enableCategories</name>
+            <entity>category</entity>
+            <label>Enable Categories For Product Listing Grid</label>
+            <label lang="de-DE">Kategorien für Produktauflistungsraster aktivieren</label>
+            <helpText>Select categories to enable the matrix grid for product listing. Leave empty
+                to apply to all categories</helpText>
+            <helpText lang="de-DE">Wählen Sie Kategorien aus, um das Matrixraster für die
+                Produktauflistung zu aktivieren. Lassen Sie das Feld leer, um es auf alle Kategorien
+                anzuwenden</helpText>
+        </component>
+        <input-field type="bool">
+            <name>showMinimalProperties</name>
+            <label>Display Attribute Image/Logo Columns</label>
+            <label lang="de-DE">Attribut-Bild-/Logo-Spalten anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Show or hide attribute image/logo columns in the product listing grid</helpText>
+            <helpText lang="de-DE">Attribut-Bild-/Logo-Spalten im Produktauflistungsraster anzeigen
+                oder ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showMinimalProductSku</name>
+            <label>Display Product SKU</label>
+            <label lang="de-DE">Produkt-SKU anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Show or hide the product SKU column in the product listing grid</helpText>
+            <helpText lang="de-DE">Produkt-SKU-Spalte im Produktauflistungsraster anzeigen oder
+                ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showMinimalUnitPrice</name>
+            <label>Display Unit Price</label>
+            <label lang="de-DE">Stückpreis anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Show or hide the unit price column in the product listing grid</helpText>
+            <helpText lang="de-DE">Stückpreisspalte im Produktauflistungsraster anzeigen oder
+                ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showMinimalSubTotal</name>
+            <label>Display Sub Total</label>
+            <label lang="de-DE">Zwischensumme anzeigen</label>
+            <defaultValue>true</defaultValue>
+            <helpText>Show or hide the subtotal column in the product listing grid</helpText>
+            <helpText lang="de-DE">Zwischensummenspalte im Produktauflistungsraster anzeigen oder
+                ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showMinimalStockColorBadge</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Stock Color Badge</label>
+            <label lang="de-DE">Lagerfarbabzeichen anzeigen</label>
+            <helpText>Show or hide the stock color badge in the product listing grid</helpText>
+            <helpText lang="de-DE">Lagerfarbabzeichen im Produktauflistungsraster anzeigen oder
+                ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showMinimalOutOfStockProducts</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Out of Stock Product</label>
+            <label lang="de-DE">Nicht vorrätige Produkte anzeigen</label>
+            <helpText>Show or hide out of stock products in the product listing grid</helpText>
+            <helpText lang="de-DE">Nicht vorrätige Produkte im Produktauflistungsraster anzeigen
+                oder ausblenden</helpText>
+        </input-field>
+        <input-field type="bool">
+            <name>showMinimalTotalStockBar</name>
+            <defaultValue>true</defaultValue>
+            <label>Display Total Stock Detail</label>
+            <label lang="de-DE">Gesamtbestandsdetails anzeigen</label>
+            <helpText>Show or hide the total stock availability section in the product listing grid</helpText>
+            <helpText lang="de-DE">Abschnitt „Gesamte Lagerverfügbarkeit“ im
+                Produktauflistungsraster anzeigen oder ausblenden</helpText>
+        </input-field>
+    </card>
+</config>

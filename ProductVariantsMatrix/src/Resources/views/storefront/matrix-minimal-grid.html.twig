@@ -1,0 +1,285 @@
+{% block matrix_grid_block %}
+<template data-varient-minimal-plugin></template>
+{% if variantProducts is not empty %}
+    {% block matrix_summary_grid %}
+        <div class="summary-table-minimal" data-modal-target="modal-{{ product.id }}">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            {{ "variant.name"|trans }}
+                        </th>
+                            <th>
+                                {{ "variant.qty"|trans }}
+                            </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for variant in variantProducts|slice(0, 3) %}
+                        {# Show only first 3 variants #}
+                        <tr>
+                            <td class="variant-label">
+                                {{ variant.options|map(o => o.translated.name)|join('-') }}
+                            </td>
+                                <td class="variant-label">
+                                    {% if pluginConfig.showMinimalStockColorBadge == true %}
+                                        <span class="{% if variant.stock >= 25 %}stock-badge-green{% elseif variant.stock <= 24 && variant.stock > 1 %} stock-badge-orange{% else %} stock-badge-red {% endif %}"></span>
+                                    {% endif %}
+                                    {{ variant.stock >= 0 ? variant.stock : 0  }}
+                                </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+
+    {% block matrix_grid_inner %}
+        <!-- Full variant table inside a modal -->
+        <div id="modal-{{ product.id }}" class="variant-modal">
+            <span class="close-modal" data-close="modal-{{ product.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </span>
+            <div class="variant-modal-content">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr class="single-attr">
+                                {% set allGroups = [] %}
+                                {% for variant in variantProducts %}
+                                    {% for option in variant.options %}
+                                        {% if option.group.translated.name not in allGroups %}
+                                            {% set allGroups = allGroups|merge([option.group.translated.name]) %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                {% set sortedVariants = variantProducts|sort((a, b) => b.options|length <=> a.options|length) %}
+                                {% for group in allGroups %}
+                                    {% if pluginConfig.showMinimalProperties %}
+                                        <th scope="col" class="main-grid-td">
+                                            {{ group }}
+                                        </th>
+                                    {% endif %}
+                                {% endfor %}
+
+                                <th scope="col" class="main-grid-td">
+                                    {{ "variant.name"|trans|raw }}
+                                </th>
+                                <th scope="col" class="main-grid-td">
+                                    {{ "variant.stock-qty"|trans|raw }}
+                                </th>
+                                {% if pluginConfig.showMinimalProductSku %}
+                                    <th scope="col" class="main-grid-td">
+                                        {{ "variant.product-sku"|trans|raw }}
+                                    </th>
+                                {% endif %}
+                                {% if pluginConfig.showMinimalUnitPrice %}
+                                    <th scope="col" class="main-grid-td">
+                                        {{ "variant.unit-price"|trans|raw }}
+                                    </th>
+                                {% endif %}
+                                <th scope="col" class="main-grid-td">
+                                    {{ "variant.qty-cap"|trans|raw }}
+                                </th>
+                                {% if pluginConfig.showMinimalSubTotal %}
+                                    <th scope="col" class="main-grid-td">
+                                        {{ "variant.sub-total"|trans|raw }}
+                                    </th>
+                                {% endif %}
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            {% set totalStock = 0 %}
+                            {% set sortedVariants = variantProducts|sort((a, b) => b.options|length <=> a.options|length) %}
+
+                            {% for variant in sortedVariants %}
+                                {% if variant.stock >= 1 %}
+                                    {% set totalStock = totalStock + variant.stock %}
+                                {% endif %}
+
+                                {% if variant.stock >= 1 || pluginConfig.showMinimalOutOfStockProducts != false %}
+                                    <tr class="variant-record">
+                                        {% set variantOptions = [] %}
+                                        {% for group in allGroups %}
+                                            {% set groupOption = variant.options|filter(option => option.group.translated.name == group)|first %}
+                                            {% set variantOptions = variantOptions|merge([groupOption.translated.name]) %}
+                                            {% if pluginConfig.showMinimalProperties && pluginConfig.showMinimalProperties == true %}
+                                                {% if groupOption %}
+                                                    {% if groupOption.media %}
+                                                        {% set displayType = 'media' %}
+                                                        {% set media = groupOption.media %}
+                                                    {% else %}
+                                                        {% set displayType = groupOption.group.displayType %}
+                                                        {% if groupOption.media %}
+                                                            {% set media = groupOption.media %}
+                                                        {% else %}
+                                                            {% set media = false %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    <td class="main-grid-td">
+                                                        <input type="radio" class="product-detail-configurator-option-input btn-check">
+                                                            <label class="product-detail-configurator-option-label  is-display-{{ displayType }} btn btn-outline-secondary d-inline-flex justify-content-center align-items-center" {% if displayType == 'color' and groupOption.colorHexCode %} style="background-color: {{ groupOption.colorHexCode }};opacity:1;height: 30px;min-width: 50px;" {% endif %} style="opacity: 1;padding: none;height: 30px;min-width: 50px;font-size: 12px;">
+                                                                {% if displayType == 'media' and groupOption.media %}
+                                                                    {% sw_thumbnails 'configurator-option-img-thumbnails' with {
+                                                                        media: groupOption.media,
+                                                                        sizes: {
+                                                                        default: '20px'
+                                                                        },
+                                                                        attributes: {
+                                                                        class: 'product-detail-configurator-option-image',
+                                                                        alt: groupOption.translated.name,
+                                                                        title: groupOption.translated.name
+                                                                        }
+                                                                        } %}
+                                                                    <span>
+                                                                        {{ groupOption.translated.name }}
+                                                                    </span>
+                                                                {% elseif (displayType == 'media' and not groupOption.media) or (displayType == 'color' and not groupOption.colorHexCode) or displayType == 'text' %}
+                                                                    {{ groupOption.translated.name }}
+                                                                {% endif %}
+                                                            </label>
+                                                        </td>
+                                                    {% else %}
+                                                        <td class="main-grid-td ">
+                                                            <span class="text-danger fw-bolder">
+                                                                {{ "variant.not-avaliable"|trans }}
+                                                            </span>
+                                                        </td>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            <td class="variant-label">
+                                                {{ variantOptions|filter(option => option != '')|join('-') }}
+                                            </td>
+                                            <td class="is--warning variant-label">
+                                                {% if variant.stock >= 1 %}
+                                                    {{ variant.stock }}
+                                                {% else %}
+                                                    {{ "variant.zero"|trans|raw }}
+                                                {% endif %}
+
+                                                {% if pluginConfig.showMinimalStockColorBadge == true %}
+                                                    <span class="{% if variant.stock >= 25 %}stock-badge-green{% elseif variant.stock <= 24 && variant.stock > 1 %} stock-badge-orange{% else %} stock-badge-red {% endif %}"></span>
+                                                {% endif %}
+                                            </td>
+                                            {% if pluginConfig.showMinimalProductSku && pluginConfig.showMinimalProductSku == true %}
+                                                <td class="main-grid-td product-sku">
+                                                    {{ variant.productNumber }}
+                                                </td>
+                                            {% endif %}
+                                            {% if pluginConfig.showMinimalUnitPrice && pluginConfig.showMinimalUnitPrice == true %}
+                                                <td class="head-price-size">
+                                                    {% if variant.price.elements[context.currency.id].gross %}
+                                                        {% set convertedPrice = variant.price.elements[context.currency.id].gross * context.currency.factor %}
+                                                        {{ context.currency.symbol }}
+                                                        {{ convertedPrice }}
+                                                    {% else %}
+                                                        {% set convertedPrice = variant.price.elements|first.gross * context.currency.factor %}
+                                                        {{ context.currency.symbol }}
+                                                        {{ convertedPrice }}
+                                                    {% endif %}
+                                                </td>
+                                            {% endif %}
+
+                                            <td style="width:10%;">
+                                                {% if variant.stock >= 1 %}
+                                                    {% set priceDataGross = variant.price.elements[context.currency.id].gross ?? variant.price.elements|first.gross * context.currency.factor %}
+                                                    {% for id,prices in variant.price.elements %}
+                                                        {% if id === context.currency.id %}
+                                                            {% if prices.gross %}
+                                                                {% set priceDataGross = prices.gross %}
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% block buy_widget_buy_quantity_input_group %}
+                                                        <div class="input-group product-detail-quantity-group quantity-selector-group bg-white" data-quantity-selector="true">
+                                                            <label class="form-label visually-hidden">
+                                                                {{ 'component.product.quantitySelect.label'|trans|striptags }}
+                                                            </label>
+                                                            <button type="button" class="btn bg-white btn-outline-light btn-minus js-btn-minus p-1 varient-product-minus" data-sub-total-price="{{ priceDataGross }}" data-name="{{ variantOptions|join('-') }}" data-sku="{{ variant.productNumber }}">
+                                                                {% sw_icon 'minus' style {size: 'sm'} %}
+                                                            </button>
+                                                            <input type="number" data-id="{{ variant.id }}" data-name="{{ variantOptions|join('-') }}" data-sku="{{ variant.productNumber }}" class="form-control js-quantity-selector quantity-selector-group-input varient-product-input-field" data-sub-total-price="{{ priceDataGross }}" min="0" max="{{ product.calculatedMaxPurchase }}" value="0" data-display="{{ variant.options|json_encode }}" />
+                                                            <button type="button" class="btn bg-white btn-outline-light btn-plus js-btn-plus p-1 varient-product-plus" data-name="{{ variantOptions|join('-') }}" data-sku="{{ variant.productNumber }}" data-sub-total-price="{{ priceDataGross }}">
+                                                                {% sw_icon 'plus' style {size: 'sm'} %}
+                                                            </button>
+                                                            {% if product.translated.packUnit %}
+                                                                <span class="input-group-text packaging-unit">
+                                                                    {% if product.minPurchase >= 1 and product.translated.packUnitPlural %}
+                                                                        {{ product.translated.packUnitPlural }}
+                                                                    {% elseif product.translated.packUnit %}
+                                                                        {{ product.translated.packUnit }}
+                                                                    {% endif %}
+                                                                </span>
+                                                            {% endif %}
+                                                        </div>
+                                                    {% endblock %}
+                                                {% else %}
+                                                    <span class="text-danger fw-bolder">
+                                                        {{ "variant.out-of-stock"|trans|raw }}
+                                                    </span>
+                                                {% endif %}
+                                            </td>
+
+                                            {% if pluginConfig.showMinimalSubTotal && pluginConfig.showMinimalSubTotal == true %}
+                                                <td>
+                                                    {{ context.currency.symbol }}
+                                                    <span id="subTotalPrice" class="head-price-size">
+                                                        {{ "variant.sub-total-price"|trans|raw }}
+                                                    </span>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if pluginConfig.showMinimalTotalStockBar %}
+                        <div class="d-flex flex-wrap {% if pluginConfig.showMinimalStockColorBadge %} justify-content-around {% else %} justify-content-end {% endif %} py-2">
+                            {% if pluginConfig.showMinimalStockColorBadge %}
+                                <p class="variant-label">
+                                    <span class="stock-badge-red"></span>
+                                    {{ "variant.not-available"|trans|raw }}
+                                </p>
+                                <p class="variant-label">
+                                    <span class="stock-badge-orange"></span>
+                                    {{ "variant.less-than-25"|trans|raw }}
+                                </p>
+                                <p class="variant-label">
+                                    <span class="stock-badge-green"></span>
+                                    {{ "variant.more-than-25"|trans|raw }}
+                                </p>
+                            {% endif %}
+                            <p class="variant-label">
+                                {{ "variant.in-total"|trans|raw }}
+                                <b>
+                                    {{ totalStock }}
+                                    {{ "variant.pcs"|trans|raw }}
+                                </b>
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="d-flex sm:justify-content-between justify-content-end align-items-center gap-1 md:gap-2">
+                    <button class="spacing-zero btn btn-primary variant-label btn-add-to-cart" title="{{ 'detail.addProduct'|trans|striptags }}" data-url="{{ path('frontend.matrix.checkout.addVariants') }}" aria-label="{{ 'detail.addProduct'|trans|striptags }}">
+                        {% if pluginConfig.cartBtnLabel %}
+                            {{ pluginConfig.cartBtnLabel }}
+                        {% else %}
+                            {{ 'detail.addProduct'|trans|sw_sanitize }}
+                        {% endif %}
+                    </button>
+                    <button class="spacing-zero btn btn-secondary variant-btn-reset variant-label">
+                        {{ pluginConfig.resetBtnLabel != '' ? pluginConfig.resetBtnLabel : "variant.reset"|trans|raw }}
+                    </button>
+                </div>
+            </div>
+            <input value="{{ context.currency.symbol }}" id="currency-symbol" name="currency" hidden></input>
+
+        {% endblock %}
+    {% endif %}
+{% endblock %}

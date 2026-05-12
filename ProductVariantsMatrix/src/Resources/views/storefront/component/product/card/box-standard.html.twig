@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% block component_product_box_variant_characteristics %}{% endblock %}
+{% block component_product_box_price %}
+
+    {% if product.extensions.pluginConfiguration.productListingView && product.extensions.VariantMatrix is not empty %}
+        <div class="product-price-info">
+            <p class="product-price-unit"></p>
+            <div class="product-price-wrapper"></div>
+        </div>
+        <div class="matrix-view-minimal-grid">
+            {% sw_include '@ProductVariantsMatrix/storefront/matrix-minimal-grid.html.twig' with {
+        variantProducts: product.extensions.VariantMatrix,
+        pluginConfig: product.extensions.pluginConfiguration,
+        } %}
+        </div>
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
