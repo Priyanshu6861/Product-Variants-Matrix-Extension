@@ -1,0 +1,29 @@
+{
+    "variant": {
+        "summary": "Gesamtzusammenfassung",
+        "reset": "Alles zurücksetzen",
+        "sku": "SKU",
+        "attribute": "Attribute",
+        "qty": "Qty",
+        "qty-cap": "QTY",
+        "remove": "Entfernen",
+        "zero": 0,
+        "total": "Gesamt",
+        "grand-total": "0.00",
+        "sub-total-price": "0.00",
+        "name": "Name",
+        "stock-qty": "LAGERMENGE",
+        "product-sku": "PRODUKT-SKU",
+        "unit-price": "STÜCKPREIS",
+        "sub-total": "ZWISCHENSUMME",
+        "out-of-stock": "Ausverkauft",
+        "in-total": "In Summe:",
+        "not-available": "Nicht verfügbar",
+        "less-than-25": "Weniger als 25 verfügbar",
+        "more-than-25": "Mehr als 25 verfügbar",
+        "pcs": "pcs.",
+        "no-records": "Keine Aufzeichnungen",
+        "not-avaliable": "N/A",
+        "search-placeholder": "Nach Varianten suchen..."
+    }
+}

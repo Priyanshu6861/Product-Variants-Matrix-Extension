@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget-form.html.twig' %}
+
+{% set formAction = path('frontend.checkout.line-item.add') %}
+{% set pluginConfig = page.extensions.pluginConfiguration %}
+
+{% block page_product_detail_buy_form_inner %}
+	{% if (page.extensions.variantProducts is empty && pluginConfig.configMatrixEnable != true) || (page.extensions.variantProducts is not empty && pluginConfig.configMatrixEnable != true) || (pluginConfig.configMatrixEnable == true && page.extensions.variantProducts is empty) %}
+		{{ parent() }}
+	{% else %}
+		{% block matrix_grid_add_to_cart_button %}
+			<div	class="{% if showQuantitySelect %}col-8{% else %}col-12{% endif %}">
+				<div	class="d-grid">
+					
+
+					<button	class="btn btn-primary btn-buy btn-add-to-cart"	title="{{ 'detail.addProduct'|trans|striptags }}"	data-url="{{ path('frontend.matrix.checkout.addVariants') }}"	aria-label="{{ 'detail.addProduct'|trans|striptags }}">
+						{% if pluginConfig.cartBtnLabel %}
+							{{ pluginConfig.cartBtnLabel }}
+						{% else %}
+							{{ 'detail.addProduct'|trans|sw_sanitize }}
+						{% endif %}
+					</button>
+				</div>
+			</div>
+		{% endblock %}
+	{% endif %}
+
+{% endblock %}

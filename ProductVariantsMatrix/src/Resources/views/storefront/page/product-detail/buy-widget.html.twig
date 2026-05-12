@@ -1,0 +1,14 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
+
+{% block buy_widget_configurator_include %}
+    {% if page.extensions.variantProducts is not empty && page.extensions.pluginConfiguration.configMatrixEnable != false %}
+        {% sw_include '@ProductVariantsMatrix/storefront/matrix-grid.html.twig' with {
+				variantProducts : page.extensions.variantProducts,
+				pluginConfig : page.extensions.pluginConfiguration
+			} %}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{# page_product_detail_configurator_include #}

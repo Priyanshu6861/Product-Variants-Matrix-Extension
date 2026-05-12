@@ -1,0 +1,29 @@
+{
+    "variant": {
+        "summary": "Total summary",
+        "reset": "Reset all",
+        "sku": "SKU",
+        "attribute": "Attributes",
+        "qty": "Qty",
+        "qty-cap": "QTY",
+        "remove": "Remove",
+        "zero": 0,
+        "total": "Total",
+        "grand-total": "0.00",
+        "sub-total-price": "0.00",
+        "name": "Name",
+        "stock-qty": "STOCK QTY",
+        "product-sku": "PRODUCT SKU",
+        "unit-price": "UNIT PRICE",
+        "sub-total": "SUB TOTAL",
+        "out-of-stock": "Out of Stock",
+        "in-total": "In Total:",
+        "not-available": "Not Avaliable",
+        "less-than-25": "Less Then 25 Avaliable",
+        "more-than-25": "More Then 25 Avaliable",
+        "pcs": "pcs.",
+        "no-records": "No Records",
+        "not-avaliable": "N/A",
+        "search-placeholder":"Search For Variants..."
+    }
+}

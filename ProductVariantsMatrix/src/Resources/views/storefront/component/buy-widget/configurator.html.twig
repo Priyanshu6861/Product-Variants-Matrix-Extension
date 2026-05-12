@@ -1,0 +1,29 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/configurator.html.twig' %}
+
+{% block buy_widget_configurator %}
+	<div	class="product-detail-configurator">
+		{% if elementId is defined and elementId is not null and pageType != 'product_detail' %}
+			{% set config = {
+                url: url('frontend.cms.buybox.switch', { productId: product.parentId }),
+                elementId: elementId,
+                pageType: pageType
+            } %}
+		{% else %}
+			{% set config = {
+                url: url('frontend.detail.switch', { productId: product.parentId }),
+                pageType: pageType
+            } %}
+		{% endif %}
+
+		{% if page.extensions.variantProducts is not empty && page.extensions.pluginConfiguration.configMatrixEnable != false %}
+			{% sw_include '@ProductVariantsMatrix/storefront/matrix-grid.html.twig' with {
+				variantProducts : page.extensions.variantProducts,
+				pluginConfig : page.extensions.pluginConfiguration
+			} %}
+		{% else %}
+			{% block buy_widget_configurator_form %}
+				{{ parent() }}
+			{% endblock %}
+		{% endif %}
+	</div>
+{% endblock %}
