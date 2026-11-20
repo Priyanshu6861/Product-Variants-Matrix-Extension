@@ -1,8 +1,14 @@
 # Product Variants Matrix Extension for Shopware 6
 
-A powerful Shopware 6 plugin that transforms product variant selection with an intuitive **matrix/grid view** for displaying product variants in a tabular format. Perfect for stores selling products with multiple options like clothing, furniture, or any configurable items.
+<p align="left">
+  <img src="https://img.shields.io/badge/Shopware-6.6%20%7C%206.7-189EFF?style=for-the-badge&logo=shopware&logoColor=white" alt="Shopware" />
+  <img src="https://img.shields.io/badge/PHP-8.2%2B-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP" />
+  <img src="https://img.shields.io/badge/Symfony-6.4%20%7C%207.x-000000?style=for-the-badge&logo=symfony&logoColor=white" alt="Symfony" />
+  <img src="https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge" alt="Version" />
+</p>
 
-**Status**: ✅ Production Ready | **Version**: 1.0.0 | **License**: Proprietary
+A powerful Shopware 6 plugin that transforms product variant selection with an intuitive **matrix/grid view** for displaying product variants in a tabular format. Perfect for stores selling products with multiple options like clothing, furniture, or any configurable items.
 
 ---
 
